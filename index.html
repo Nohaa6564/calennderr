@@ -579,8 +579,12 @@ function getSimpleJulianDate(date = new Date()) {
       }
       
       if (type === 'julian') {
-        return `${dayName}، ${julianDate.day} ${julianMonths[julianDate.month]} ${julianDate.year}`;
-      }
+  const jDate = new Date(currentDate);
+  jDate.setDate(jDate.getDate() - 13); // تحويل التاريخ إلى جولياني فعلي
+  const dayIndex = jDate.getDay(); // الآن نحصل على اسم اليوم الصحيح
+  const dayName = weekdayNames[dayIndex];
+  return `${dayName}، ${julianDate.day} ${julianMonths[julianDate.month]} ${julianDate.year}`;
+}
       
       return `${dayName}، ${date.getDate()} ${gregorianMonths[date.getMonth()]} ${date.getFullYear()}`;
     }
