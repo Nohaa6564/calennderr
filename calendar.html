@@ -277,46 +277,61 @@ td.selected-day {
   height: auto;
 }
 /* استجابة شاشات التلفاز الكبيرة جدًا */
-@media (min-width: 2000px), (min-height: 1200px) {
-  body {
-    font-size: 0.9vw;
-    overflow-y: hidden;
+/* استجابة مرنة لجميع أحجام شاشات التلفاز */
+@media (min-width: 1600px) {
+  html, body {
+    font-size: 0.8vw;
+    overflow: hidden; /* إلغاء التمرير */
+    margin: 0;
+    padding: 0;
   }
 
   .time {
-    font-size: 1.5vw;
-    padding: 1vh 0;
-  }
+  font-size: clamp(18px, 4vw, 50px); /* من 18px حتى 50px */
+  font-weight: bold;
+  text-align: center;
+}
 
-  .scrolling-text {
-    font-size: 1.2vw;
-    padding: 0.5vh 0;
-  }
+.scrolling-text {
+  font-size: clamp(14px, 3vw, 40px); /* من 14px حتى 40px */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
   .calendar-box {
-    width: 18vw;
+    width: 17vw;
     padding: 1vh;
   }
 
   .calendar-title,
   .calendar-date {
-    font-size: 1.2vw;
+    font-size: 1vw;
   }
 
   .calendar-nav-button {
-    font-size: 1.2vw;
+    font-size: 1vw;
     padding: 0.5vh 1vw;
   }
 
   th, td {
-    font-size: 1.2vw;
-    padding: 0.5vh 0.3vw;
+    font-size: 1vw;
+    padding: 0.5vh 0.5vw;
+  }
+
+  .header-logos {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 1vh 0;
   }
 
   .header-logos .logo {
-    width: 15vw;
+    width: 12vw;
+    max-width: 200px;
   }
 }
+
 
 
   </style>
