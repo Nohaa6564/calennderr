@@ -899,7 +899,7 @@ function getSimpleJulianDate(date = new Date()) {
     
     // تحديث الساعة
     function updateClock() {
-      const now = new Date();
+      const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Riyadh" }));
       // استخدام الأرقام الإنجليزية بدلاً من العربية
       document.getElementById('clock').innerText = now.toLocaleTimeString('en-US');
     }
