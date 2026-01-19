@@ -1091,14 +1091,31 @@ row += `<td class="${isToday ? 'today' : ''}" onclick="onJulianClick(${calendarY
   document.getElementById('calendar-body').innerHTML = html;
 }
 function updateInventory() {
-  const baseDay = 5180;
-  const interval = 90;
-  const todayJulian = getSimpleJulianDate();
+const today = new Date();
 
-  const passed = todayJulian - baseDay;
-  const nextInventory = baseDay + Math.ceil(passed / interval) * interval;
+// سنة مرجعية صحيحة
+const referenceYear = 2025;
+const referenceInventory = 6080; // قيمة الجرد في بداية 2025
 
-  document.getElementById("inventory").textContent = "الجرد القادم " + nextInventory;
+// فرق السنوات
+const yearDiff = today.getFullYear() - referenceYear;
+
+// الجرد في بداية السنة الحالية
+const inventoryAtYearStart = referenceInventory + yearDiff * 10;
+
+// بداية السنة الحالية
+const startOfYear = new Date(today.getFullYear(), 0, 1);
+
+// عدد الأيام منذ بداية السنة
+const daysPassed = Math.floor(
+(today - startOfYear) / (1000 * 60 * 60 * 24)
+);
+
+// كل 90 يوم يزيد 1
+const inventoryNow = inventoryAtYearStart + Math.floor(daysPassed / 90);
+
+document.getElementById("inventory").textContent =
+"الجرد القادم: " + inventoryNow;
 }
 
 // عند التحميل
