@@ -1093,15 +1093,12 @@ row += `<td class="${isToday ? 'today' : ''}" onclick="onJulianClick(${calendarY
 function updateInventory() {
 const today = new Date();
 
-// سنة مرجعية صحيحة
-const referenceYear = 2025;
-const referenceInventory = 6080; // قيمة الجرد في بداية 2025
+// سنة مرجعية ثابتة
+const referenceYear = 2026;
+const referenceValue = 6090; // قيمة الجرد في بداية هذه السنة
 
 // فرق السنوات
 const yearDiff = today.getFullYear() - referenceYear;
-
-// الجرد في بداية السنة الحالية
-const inventoryAtYearStart = referenceInventory + yearDiff * 10;
 
 // بداية السنة الحالية
 const startOfYear = new Date(today.getFullYear(), 0, 1);
@@ -1111,12 +1108,19 @@ const daysPassed = Math.floor(
 (today - startOfYear) / (1000 * 60 * 60 * 24)
 );
 
-// كل 90 يوم يزيد 1
-const inventoryNow = inventoryAtYearStart + Math.floor(daysPassed / 90);
+// عدد الأرباع (كل 90 يوم)
+const quartersPassed = Math.floor(daysPassed / 90);
+
+// كل ربع = +30
+const inventoryNow =
+referenceValue +
+yearDiff * 120 + // 4 أرباع × 30
+quartersPassed * 30;
 
 document.getElementById("inventory").textContent =
 "الجرد القادم: " + inventoryNow;
 }
+
 
 // عند التحميل
 updateInventory();
